@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
-class QrService extends StatefulWidget {
-  static String id = 'qrservice';
+class portefeuille extends StatefulWidget {
+  static String id = 'portefeuille';
   @override
-  _QrServiceState createState() => _QrServiceState();
+  _portefeuilleState createState() => _portefeuilleState();
 }
 
-class _QrServiceState extends State<QrService> {
+class _portefeuilleState extends State<portefeuille> {
   String qrCode = 'Unknown';
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,7 @@ class _QrServiceState extends State<QrService> {
       appBar: AppBar(
         backgroundColor: kMainColor,
         title: Text(
-          'Qr Code Service ',
+          'Qr portefeuille ',
         ),
 
       ),
@@ -37,21 +36,7 @@ class _QrServiceState extends State<QrService> {
         padding: const EdgeInsets.only(top: 200),
         child: ListView(
           children: [
-            CustomTextField(
-                onClick: (test)=> {},
-                icon: Icons.high_quality,
-                hint: "Enter your gasoit type"),
 
-            SizedBox(
-              height: height * .02,
-            ),
-            CustomTextField(
-              icon: Icons.monetization_on,
-              hint: "Enter the price ",
-            ),
-            SizedBox(
-              height: height * .02,
-            ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 120),
               child: FlatButton(
@@ -68,8 +53,8 @@ class _QrServiceState extends State<QrService> {
             SizedBox(
               height: height * .02,
             ),
-             Text(
-                 '$qrCode',
+            Text(
+              '$qrCode',
               style: TextStyle(color: Colors.black),
             ),
 
@@ -99,3 +84,4 @@ class _QrServiceState extends State<QrService> {
     }
   }
 }
+

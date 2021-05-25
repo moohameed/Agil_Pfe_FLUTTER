@@ -2,6 +2,7 @@ import 'package:buy_it/constants.dart';
 import 'package:buy_it/models/product.dart';
 import 'package:buy_it/screens/login_screen.dart';
 import 'package:buy_it/screens/user/CartScreen.dart';
+import 'package:buy_it/screens/user/portfeuille.dart';
 import 'package:buy_it/screens/user/productInfo.dart';
 import 'package:buy_it/screens/user/qrService.dart';
 import 'package:buy_it/services/store.dart';
@@ -41,14 +42,17 @@ class _HomePageState extends State<HomePage> {
               currentIndex: _bottomBarIndex,
               fixedColor: kMainColor,
               onTap: (value) async {
-                if (value == 2) {
+                if (value == 3) {
                   SharedPreferences pref =
                       await SharedPreferences.getInstance();
                   pref.clear();
                   await _auth.signOut();
                   Navigator.popAndPushNamed(context, LoginScreen.id);
+
                 }else if (value == 0){
                   Navigator.popAndPushNamed(context,QrService.id ) ;
+                }else if (value == 1){
+                  Navigator.popAndPushNamed(context,portefeuille.id ) ;
                 }
                 setState(() {
                   _bottomBarIndex = value;
@@ -56,7 +60,9 @@ class _HomePageState extends State<HomePage> {
               },
               items: [
                 BottomNavigationBarItem(
-                    title: Text('QrService'), icon: Icon(Icons.qr_code_scanner)),
+                    title: Text('Qr gasoil'), icon: Icon(Icons.local_gas_station)),
+                BottomNavigationBarItem(
+                    title: Text('Qr portefeuille '), icon: Icon(Icons.monetization_on)),
                 BottomNavigationBarItem(
                     title: Text('orders'), icon: Icon(Icons.border_all)),
                 BottomNavigationBarItem(

@@ -13,6 +13,7 @@ import 'package:buy_it/screens/login_screen.dart';
 import 'package:buy_it/screens/signup_screen.dart';
 import 'package:buy_it/screens/user/CartScreen.dart';
 import 'package:buy_it/screens/user/homePage.dart';
+import 'package:buy_it/screens/user/portfeuille.dart';
 import 'package:buy_it/screens/user/productInfo.dart';
 import 'package:buy_it/screens/user/qrService.dart';
 import 'package:flutter/cupertino.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
                 AdminHome.id: (context) => AdminHome(),
                 AddProduct.id: (context) => AddProduct(),
                 QrService.id : (context) => QrService(),
+                portefeuille.id : (context) => portefeuille(),
               },
             ),
           );

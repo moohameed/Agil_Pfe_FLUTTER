@@ -9,12 +9,16 @@ import 'package:provider/provider.dart';
 import '../constants.dart';
 import 'package:buy_it/services/auth.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
+import 'package:date_field/date_field.dart';
+import 'package:intl/intl.dart';
 
 class SignupScreen extends StatelessWidget {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   static String id = 'SignupScreen';
-  String _username , _email, _password ;
+  String _username , _email, _password ,_addres,_ville ,_number , _postal ;
   final _auth = Auth();
+  DateTime _selectedDate;
+  TextEditingController _textEditingController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -57,6 +61,58 @@ class SignupScreen extends StatelessWidget {
                 hint: 'Enter your password',
                 icon: Icons.lock,
               ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                onClick: (value) {
+                  _addres = value;
+                },
+                hint: 'Enter your addres',
+                icon: Icons.place,
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                onClick: (value) {
+                  _ville = value;
+                },
+                hint: 'Enter your ville',
+                icon: Icons.local_airport,
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                onClick: (value) {
+                  _number = value;
+                },
+                hint: 'Enter your Number',
+                icon: Icons.phone,
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+              CustomTextField(
+                onClick: (value) {
+                  _postal = value;
+                },
+                hint: 'Enter your Postal code',
+                icon: Icons.post_add,
+              ),
+              SizedBox(
+                height: height * .02,
+              ),
+           TextField(
+            focusNode: AlwaysDisabledFocusNode(),
+            controller: _textEditingController,
+            onTap: () {
+              _selectDate(context);
+            },
+           ),
+
+
               SizedBox(
                 height: height * .05,
               ),
@@ -120,4 +176,42 @@ class SignupScreen extends StatelessWidget {
       ),
     );
   }
+
+_selectDate(BuildContext context) async {
+  DateFormat formatter = DateFormat('yyyy-mm-dd');//specifies day/month/year format
+  DateTime newSelectedDate = await showDatePicker(
+      context: context,
+      initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2040),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.dark().copyWith(
+            colorScheme: ColorScheme.dark(
+              primary: Colors.deepPurple,
+              onPrimary: Colors.white,
+              surface: Colors.blueGrey,
+              onSurface: Colors.yellow,
+            ),
+            dialogBackgroundColor: Colors.blue[500],
+          ),
+          child: child,
+        );
+      });
+
+  if (newSelectedDate != null) {
+    _selectedDate = newSelectedDate;
+    _textEditingController
+      ..text = DateFormat.yMMMd().format(_selectedDate)
+      ..selection = TextSelection.fromPosition(TextPosition(
+          offset: _textEditingController.text.length,
+          affinity: TextAffinity.upstream));
+  }
 }
+}
+class AlwaysDisabledFocusNode extends FocusNode {
+  @override
+  bool get hasFocus => false;
+}
+  
+
