@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
             ),
           );
         } else {
-         //isUserLoggedIn = snapshot.data.getString('token') ?? false;
+          //isUserLoggedIn = snapshot.data.getString('token') ?? false;
           isUserLoggedIn = true;
           return MultiProvider(
             providers: [
@@ -68,8 +68,8 @@ class MyApp extends StatelessWidget {
                 HomePage.id: (context) => HomePage(),
                 AdminHome.id: (context) => AdminHome(),
                 AddProduct.id: (context) => AddProduct(),
-                QrService.id : (context) => QrService(),
-                portefeuille.id : (context) => portefeuille(),
+                QrService.id: (context) => QrService(),
+                portefeuille.id: (context) => portefeuille(),
               },
             ),
           );

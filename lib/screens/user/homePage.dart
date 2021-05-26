@@ -48,11 +48,10 @@ class _HomePageState extends State<HomePage> {
                   pref.clear();
                   await _auth.signOut();
                   Navigator.popAndPushNamed(context, LoginScreen.id);
-
-                }else if (value == 0){
-                  Navigator.popAndPushNamed(context,QrService.id ) ;
-                }else if (value == 1){
-                  Navigator.popAndPushNamed(context,portefeuille.id ) ;
+                } else if (value == 0) {
+                  Navigator.popAndPushNamed(context, QrService.id);
+                } else if (value == 1) {
+                  Navigator.popAndPushNamed(context, portefeuille.id);
                 }
                 setState(() {
                   _bottomBarIndex = value;
@@ -60,9 +59,11 @@ class _HomePageState extends State<HomePage> {
               },
               items: [
                 BottomNavigationBarItem(
-                    title: Text('Qr gasoil'), icon: Icon(Icons.local_gas_station)),
+                    title: Text('Qr gasoil'),
+                    icon: Icon(Icons.local_gas_station)),
                 BottomNavigationBarItem(
-                    title: Text('Qr portefeuille '), icon: Icon(Icons.monetization_on)),
+                    title: Text('Qr portefeuille '),
+                    icon: Icon(Icons.monetization_on)),
                 BottomNavigationBarItem(
                     title: Text('orders'), icon: Icon(Icons.border_all)),
                 BottomNavigationBarItem(

@@ -19,29 +19,26 @@ class _QrServiceState extends State<QrService> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.popAndPushNamed(context, HomePage.id) ;
+        onPressed: () {
+          Navigator.popAndPushNamed(context, HomePage.id);
         },
-        backgroundColor: kMainColor ,
+        backgroundColor: kMainColor,
         child: Icon(Icons.cancel),
-
       ),
       appBar: AppBar(
         backgroundColor: kMainColor,
         title: Text(
           'Qr Code Service ',
         ),
-
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 200),
         child: ListView(
           children: [
             CustomTextField(
-                onClick: (test)=> {},
+                onClick: (test) => {},
                 icon: Icons.high_quality,
                 hint: "Enter your gasoit type"),
-
             SizedBox(
               height: height * .02,
             ),
@@ -68,18 +65,18 @@ class _QrServiceState extends State<QrService> {
             SizedBox(
               height: height * .02,
             ),
-             Text(
-                 '$qrCode',
-              style: TextStyle(color: Colors.black),
+            Center(
+              child: Text(
+                '$qrCode',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
-
-
           ],
         ),
       ),
-
-    ) ;
+    );
   }
+
   Future<void> scanQRCode() async {
     try {
       final qrCode = await FlutterBarcodeScanner.scanBarcode(

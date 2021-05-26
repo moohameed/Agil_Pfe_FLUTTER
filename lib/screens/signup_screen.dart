@@ -15,7 +15,7 @@ import 'package:intl/intl.dart';
 class SignupScreen extends StatelessWidget {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   static String id = 'SignupScreen';
-  String _username , _email, _password ,_addres,_ville ,_number , _postal ;
+  String _username, _email, _password, _addres, _ville, _number, _postal;
   final _auth = Auth();
   DateTime _selectedDate;
   TextEditingController _textEditingController = TextEditingController();
@@ -36,7 +36,7 @@ class SignupScreen extends StatelessWidget {
               ),
               CustomTextField(
                 onClick: (value) {
-                  _username = value ;
+                  _username = value;
                 },
                 icon: Icons.perm_identity,
                 hint: 'Enter your name',
@@ -104,15 +104,13 @@ class SignupScreen extends StatelessWidget {
               SizedBox(
                 height: height * .02,
               ),
-           TextField(
-            focusNode: AlwaysDisabledFocusNode(),
-            controller: _textEditingController,
-            onTap: () {
-              _selectDate(context);
-            },
-           ),
-
-
+              TextField(
+                focusNode: AlwaysDisabledFocusNode(),
+                controller: _textEditingController,
+                onTap: () {
+                  _selectDate(context);
+                },
+              ),
               SizedBox(
                 height: height * .05,
               ),
@@ -130,7 +128,9 @@ class SignupScreen extends StatelessWidget {
                         _globalKey.currentState.save();
                         try {
                           final authResult = await _auth.signUpNode(
-                            _username.trim(),  _email.trim(), _password.trim());
+                              _username.trim(),
+                              _email.trim(),
+                              _password.trim());
                           modelhud.changeisLoading(false);
                           Navigator.pushNamed(context, HomePage.id);
                         } on PlatformException catch (e) {
@@ -177,41 +177,41 @@ class SignupScreen extends StatelessWidget {
     );
   }
 
-_selectDate(BuildContext context) async {
-  DateFormat formatter = DateFormat('yyyy-mm-dd');//specifies day/month/year format
-  DateTime newSelectedDate = await showDatePicker(
-      context: context,
-      initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2040),
-      builder: (BuildContext context, Widget child) {
-        return Theme(
-          data: ThemeData.dark().copyWith(
-            colorScheme: ColorScheme.dark(
-              primary: Colors.deepPurple,
-              onPrimary: Colors.white,
-              surface: Colors.blueGrey,
-              onSurface: Colors.yellow,
+  _selectDate(BuildContext context) async {
+    DateFormat formatter =
+        DateFormat('yyyy-mm-dd'); //specifies day/month/year format
+    DateTime newSelectedDate = await showDatePicker(
+        context: context,
+        initialDate: _selectedDate != null ? _selectedDate : DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2040),
+        builder: (BuildContext context, Widget child) {
+          return Theme(
+            data: ThemeData.dark().copyWith(
+              colorScheme: ColorScheme.dark(
+                primary: Colors.deepPurple,
+                onPrimary: Colors.white,
+                surface: Colors.blueGrey,
+                onSurface: Colors.yellow,
+              ),
+              dialogBackgroundColor: Colors.blue[500],
             ),
-            dialogBackgroundColor: Colors.blue[500],
-          ),
-          child: child,
-        );
-      });
+            child: child,
+          );
+        });
 
-  if (newSelectedDate != null) {
-    _selectedDate = newSelectedDate;
-    _textEditingController
-      ..text = DateFormat.yMMMd().format(_selectedDate)
-      ..selection = TextSelection.fromPosition(TextPosition(
-          offset: _textEditingController.text.length,
-          affinity: TextAffinity.upstream));
+    if (newSelectedDate != null) {
+      _selectedDate = newSelectedDate;
+      _textEditingController
+        ..text = DateFormat.yMMMd().format(_selectedDate)
+        ..selection = TextSelection.fromPosition(TextPosition(
+            offset: _textEditingController.text.length,
+            affinity: TextAffinity.upstream));
+    }
   }
 }
-}
+
 class AlwaysDisabledFocusNode extends FocusNode {
   @override
   bool get hasFocus => false;
 }
-  
-

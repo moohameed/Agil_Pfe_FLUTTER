@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+
 class portefeuille extends StatefulWidget {
   static String id = 'portefeuille';
   @override
@@ -18,25 +19,22 @@ class _portefeuilleState extends State<portefeuille> {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.popAndPushNamed(context, HomePage.id) ;
+        onPressed: () {
+          Navigator.popAndPushNamed(context, HomePage.id);
         },
-        backgroundColor: kMainColor ,
+        backgroundColor: kMainColor,
         child: Icon(Icons.cancel),
-
       ),
       appBar: AppBar(
         backgroundColor: kMainColor,
         title: Text(
           'Qr portefeuille ',
         ),
-
       ),
       body: Padding(
         padding: const EdgeInsets.only(top: 200),
         child: ListView(
           children: [
-
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 120),
               child: FlatButton(
@@ -53,18 +51,18 @@ class _portefeuilleState extends State<portefeuille> {
             SizedBox(
               height: height * .02,
             ),
-            Text(
-              '$qrCode',
-              style: TextStyle(color: Colors.black),
+            Center(
+              child: Text(
+                '$qrCode',
+                style: TextStyle(color: Colors.black),
+              ),
             ),
-
-
           ],
         ),
       ),
-
-    ) ;
+    );
   }
+
   Future<void> scanQRCode() async {
     try {
       final qrCode = await FlutterBarcodeScanner.scanBarcode(
@@ -84,4 +82,3 @@ class _portefeuilleState extends State<portefeuille> {
     }
   }
 }
-
